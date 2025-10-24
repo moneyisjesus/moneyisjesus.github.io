@@ -3,6 +3,6 @@
   "target": {
     "namespace": "android_app",
     "package_name": "io.github.moneysjesus.twa",
-    "sha256_cert_fingerprints": ["YOUR_PLAY_SIGNING_SHA256"]
+    "sha256_cert_fingerprints": ["PASTE_YOUR_PLAY_SIGNING_SHA256_HERE"]
   }
 }]
