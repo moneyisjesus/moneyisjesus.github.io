@@ -1,8 +1,11 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "io.github.moneysjesus.twa",
-    "sha256_cert_fingerprints": ["PASTE_YOUR_PLAY_SIGNING_SHA256_HERE"]
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.github.moneyisjesus.twa",
+      "sha256_cert_fingerprints":
+        ["DC:2F:B4:8C:8F:C0:94:AA:2E:63:E8:AE:21:E6:5E:A1:DB:AF:C4:B5:42:12:07:0F:86:68:3A:06:B5:1C:38:D1"]
+    }
   }
-}]
+]
