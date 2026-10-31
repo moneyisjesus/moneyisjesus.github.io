@@ -24,9 +24,21 @@
 
 <main>
   <section id="view-results" class="view active" aria-label="Latest results">
-    <div id="chips" class="chips" role="group" aria-label="Operators"></div>
-    <p id="updated" class="muted small"></p>
+    <div class="bar">
+      <span id="updated" class="muted small"></span>
+      <button id="edit-btn" class="link-btn">Show/Hide · Reorder</button>
+    </div>
     <div id="latest"><div class="loading">Loading results…</div></div>
+  </section>
+
+  <section id="view-detail" class="view" aria-label="Full result">
+    <div class="bar detail-bar">
+      <button id="back" class="link-btn back">‹ Back</button>
+      <b id="detail-title"></b>
+      <span></span>
+    </div>
+    <div id="detail-card"></div>
+    <div id="detail-recent"></div>
   </section>
 
   <section id="view-past" class="view" aria-label="Past results">

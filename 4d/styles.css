@@ -100,6 +100,48 @@ main { max-width: 640px; margin: 0 auto; padding: 12px 16px 24px; }
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
   padding: 14px; margin: 0 0 12px;
 }
+.center { text-align: center; }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 2px 2px 10px; min-height: 32px; }
+.link-btn { background: none; border: 0; color: var(--accent); font-weight: 600; cursor: pointer; padding: 6px 0; font-size: 14px; }
+.detail-bar { display: grid; grid-template-columns: 80px 1fr 80px; text-align: center; }
+.detail-bar .back { text-align: left; font-size: 16px; }
+
+.list { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-bottom: 12px; }
+.row {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 12px 12px 12px 14px; background: none; border: 0; border-bottom: 1px solid var(--line);
+  text-align: left; cursor: pointer;
+}
+.row:last-child { border-bottom: 0; }
+.row:active { background: var(--surface-2); }
+.row.current { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.op-badge {
+  flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--op); color: #fff; font-weight: 800; font-size: 13px; letter-spacing: .3px;
+  text-shadow: 0 1px 1px rgba(0,0,0,.25);
+}
+.row-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.row-title { font-weight: 700; font-size: 15.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row-meta { font-weight: 600; color: var(--muted); font-size: 13px; }
+.row-nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; font-size: 19px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: .5px; }
+.row-nums span { display: flex; align-items: center; gap: 6px; }
+.row-nums i {
+  font-style: normal; display: inline-grid; place-items: center; width: 20px; height: 22px; border-radius: 5px;
+  background: var(--accent); color: var(--accent-ink); font-size: 13px; font-weight: 800;
+}
+.row.compact .row-title { font-size: 14px; }
+.row.compact .row-nums { font-size: 17px; }
+.chev { flex: none; color: var(--muted); font-size: 26px; line-height: 1; }
+.row.edit { cursor: default; }
+.row.edit.off .op-badge, .row.edit.off .row-title { opacity: .4; }
+.eye { flex: none; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface-2); color: var(--accent); font-size: 16px; cursor: pointer; }
+.move { display: flex; gap: 6px; }
+.move button { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-2); cursor: pointer; font-size: 12px; }
+.move button:disabled { opacity: .3; cursor: default; }
+.head-left { display: flex; align-items: center; gap: 10px; }
+.head-left .op-badge { width: 38px; height: 38px; font-size: 12px; }
+.tap-hint { margin: 10px 2px 0; }
+
 .card.op { border-top: 4px solid var(--op); }
 .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--op); margin-right: 8px; vertical-align: 1px; }
 .chip .dot { width: 8px; height: 8px; margin-right: 6px; }
