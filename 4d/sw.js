@@ -1,6 +1,6 @@
 // App-shell cache so the app opens offline. Results are fetched fresh by the page
 // (it keeps its own copy of the last results for offline use).
-const CACHE = '4d-check-v2';
+const CACHE = '4d-check-v3';
 const SHELL = ['./', 'index.html', 'styles.css', 'app.js', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png'];
 
 self.addEventListener('install', e => {
