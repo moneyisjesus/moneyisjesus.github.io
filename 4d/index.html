@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#121418">
+<meta name="description" content="Latest 4D results for Malaysia, Singapore and Cambodia, past results and number history.">
+<title>4D Check</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">4D</span><span class="brand-name">Check</span></div>
+  <div class="top-right">
+    <span id="live" class="live" hidden>LIVE</span>
+    <button id="refresh" class="icon-btn" aria-label="Refresh">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M17.65 6.35A7.95 7.95 0 0 0 12 4a8 8 0 1 0 7.75 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section id="view-results" class="view active" aria-label="Latest results">
+    <div id="chips" class="chips" role="group" aria-label="Operators"></div>
+    <p id="updated" class="muted small"></p>
+    <div id="latest"><div class="loading">Loading results…</div></div>
+  </section>
+
+  <section id="view-past" class="view" aria-label="Past results">
+    <div class="date-row">
+      <button id="prev-day" class="icon-btn" aria-label="Previous day">‹</button>
+      <input type="date" id="date" aria-label="Draw date">
+      <button id="next-day" class="icon-btn" aria-label="Next day">›</button>
+    </div>
+    <div id="past"></div>
+  </section>
+
+  <section id="view-check" class="view" aria-label="Check a number">
+    <form id="check-form" class="check-form" autocomplete="off">
+      <input id="num" inputmode="numeric" maxlength="4" placeholder="Enter 4 digits" aria-label="4D number">
+      <button type="submit" class="btn">Check</button>
+    </form>
+    <div id="perms"></div>
+    <div id="check"><p class="muted hint">See every time a number has won, across all operators, plus its combinations.</p></div>
+  </section>
+
+  <section id="view-schedule" class="view" aria-label="Draw schedule">
+    <div id="schedule"><div class="loading">Loading schedule…</div></div>
+  </section>
+
+  <footer class="attrib">
+    Results from <a href="https://4dlivetoday.com" target="_blank" rel="noopener">4dlivetoday.com</a>, compiled from each operator's official site.
+    Not affiliated with any lottery operator. For information only.
+  </footer>
+</main>
+
+<nav class="tabs" aria-label="Sections">
+  <button data-view="results" class="active">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 4h16v4H4zm0 6h7v10H4zm9 0h7v4h-7zm0 6h7v4h-7z"/></svg>Results</button>
+  <button data-view="past">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2zm-2 8h14v10H5z"/></svg>Past</button>
+  <button data-view="check">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M10 2a8 8 0 0 1 6.32 12.9l5.39 5.4-1.41 1.4-5.4-5.39A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg>Check No.</button>
+  <button data-view="schedule">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm1 3v5.4l3.7 2.2-1 1.7L11 13.6V7z"/></svg>Schedule</button>
+</nav>
+
+<div id="toast" class="toast" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>
