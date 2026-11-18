@@ -1,0 +1,21 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'com.moneyisjesus.registerrage'
+    compileSdk 36
+    defaultConfig {
+        applicationId 'com.moneyisjesus.registerrage'
+        minSdk 24
+        targetSdk 36
+        versionCode 4
+        versionName '1.1.0'
+    }
+    buildTypes {
+        release { minifyEnabled false }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}
+dependencies {
+    implementation 'androidx.webkit:webkit:1.12.1'
+    implementation 'androidx.activity:activity:1.9.3'
+    implementation 'androidx.core:core:1.13.1'
+}
