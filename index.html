@@ -110,6 +110,32 @@ body{height:100%;overflow:hidden;margin:0;background:linear-gradient(var(--sale)
 .btn{font:400 21px/1 var(--f-display);letter-spacing:.02em;color:#fff;background:var(--sale);border:3px solid var(--ink);border-radius:10px;padding:16px 22px 14px;box-shadow:0 6px 0 var(--ink);cursor:pointer;transition:transform .08s,box-shadow .08s;width:100%}
 .btn:active{transform:translateY(4px);box-shadow:0 2px 0 var(--ink)}
 .best{margin:0;text-align:center;font:700 13px/1 var(--f-mono);color:var(--muted)}
+.btn-2{font:800 15px/1 var(--f-body);letter-spacing:.04em;color:var(--ink);background:var(--paper);border:3px solid var(--ink);border-radius:10px;padding:13px 18px 12px;box-shadow:0 4px 0 var(--ink);cursor:pointer;width:100%;transition:transform .08s,box-shadow .08s}
+.btn-2:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.btn-2:focus-visible{outline:3px solid var(--tag);outline-offset:3px}
+
+/* Staff record: the employee file */
+.file{position:relative;width:min(400px,100%);background:#f3ead2;border:3px solid var(--ink);border-radius:4px 14px 4px 4px;padding:22px 20px 20px;box-shadow:6px 6px 0 var(--ink);transform:rotate(.6deg);display:flex;flex-direction:column;gap:14px}
+.file::before{content:"STAFF FILE";position:absolute;top:-17px;left:18px;font:800 10px/1 var(--f-body);letter-spacing:.16em;background:#f3ead2;border:3px solid var(--ink);border-bottom:0;border-radius:8px 8px 0 0;padding:6px 12px 5px}
+.f-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.f-title{margin:0;font:400 28px/1 var(--f-display);color:var(--ink)}
+.f-id{font:700 12px/1.35 var(--f-mono);color:var(--muted);text-align:right}
+.rank{align-self:flex-start;font:800 12px/1 var(--f-body);letter-spacing:.08em;text-transform:uppercase;background:var(--tag);border:2px solid var(--ink);padding:7px 10px 6px;transform:rotate(-2deg)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tile{background:var(--paper);border:2px solid var(--ink);border-radius:6px;padding:9px 10px 8px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.tile .k{font:700 10px/1.1 var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tile .v{font:400 21px/1.05 var(--f-display);color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile.hot .v{color:var(--sale)}
+.f-sec{margin:2px 0 0;font:800 11px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);border-top:2px dashed rgba(36,26,46,.3);padding-top:14px}
+.f-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font:400 13.5px/1.35 var(--f-mono)}
+.f-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;font-variant-numeric:tabular-nums}
+.f-list .tag{font:800 10px/1 var(--f-body);letter-spacing:.06em;text-transform:uppercase;padding:3px 6px 2px;border:1.5px solid currentColor;border-radius:3px;margin-left:6px;vertical-align:1px}
+.f-list .tag.fired{color:var(--sale)}
+.f-list .tag.done{color:var(--nice)}
+#recordBody{display:flex;flex-direction:column;gap:12px}
+.f-empty{margin:0;font:500 14px/1.45 var(--f-body);color:var(--muted)}
+.f-btns{display:flex;flex-direction:column;gap:10px}
+.btn-link{background:none;border:0;padding:4px;font:700 13px/1 var(--f-body);color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer;align-self:center}
 
 /* End: the till receipt */
 .printer{width:min(360px,100%);display:flex;flex-direction:column;gap:18px}
@@ -173,6 +199,7 @@ body{height:100%;overflow:hidden;margin:0;background:linear-gradient(var(--sale)
         </ul>
         <p class="fine">3 warnings and you're fired. Land punches in a row to build a combo, up to x5.</p>
         <button class="btn" id="startBtn" type="button">Clock on</button>
+        <button class="btn-2" id="recordBtn" type="button">Staff record</button>
         <p class="best" id="bestStart">No shifts worked yet</p>
         <p class="legal"><a href="privacy.html">Privacy policy</a></p>
       </div>
@@ -185,6 +212,23 @@ body{height:100%;overflow:hidden;margin:0;background:linear-gradient(var(--sale)
           <div class="feed" id="feed"><div class="receipt" id="receipt"></div></div>
         </div>
         <button class="btn" id="againBtn" type="button">Clock on again</button>
+        <button class="btn-2" id="recordBtn2" type="button">Staff record</button>
+      </div>
+    </section>
+
+    <section class="overlay" id="recordScreen" hidden aria-labelledby="recordTitle">
+      <div class="file">
+        <div class="f-head">
+          <h2 class="f-title" id="recordTitle">Staff record</h2>
+          <div class="f-id">Counter 3<br>Floor staff</div>
+        </div>
+        <div class="rank" id="recordRank">Trainee</div>
+        <div id="recordBody"></div>
+        <div class="f-btns">
+          <button class="btn" id="recordPlay" type="button">Clock on</button>
+          <button class="btn-2" id="recordBack" type="button">Back</button>
+        </div>
+        <button class="btn-link" id="recordReset" type="button">Reset my record</button>
       </div>
     </section>
   </main>
@@ -224,7 +268,7 @@ const PANTS = ['#3b3f58','#5a4a3a','#2f4f6f','#6b6b6b','#4a3b5c'];
 const HAIRC = ['#2b1d16','#5a3a22','#8a5a2b','#d9b25f','#3b3b3b','#b8b2a7','#a8452f'];
 
 const SHIFT = 60000, RISE = 190, LEAVE = 230, HITDUR = 230, GLOVE_T = 270;
-const KEY_BEST = 'register-rage-best', KEY_MUTE = 'register-rage-muted';
+const KEY_BEST = 'register-rage-best', KEY_MUTE = 'register-rage-muted', KEY_CAREER = 'retail-hell-career';
 
 const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
 const lerp = (a,b,t) => a + (b - a) * t;
@@ -629,7 +673,7 @@ function startGame(){
   score = 0; warnings = 0; streak = 0; maxMult = 1; elapsed = 0; spawnT = 700; lastTxn = '$0';
   events = []; floats = []; bursts = []; parts = [];
   for (const c of customers) if (c.slot >= 0 && !c.dead && c.state !== 'leaving') { c.state = 'leaving'; c.t = 0; }
-  startScreen.hidden = true; endScreen.hidden = true;
+  startScreen.hidden = true; endScreen.hidden = true; recordScreen.hidden = true;
   mode = 'play';
   setCombo(1); updatePips();
   stamp('DOORS OPEN', C.nice);
@@ -683,7 +727,78 @@ function buildReceipt(isBest, bestVal){
     '<div class="r-foot">' + docket + '</div>' +
     '<div class="r-foot">Thanks for clocking on.<br>No refunds. No exchanges.</div>';
 }
+/* ---------- Staff record (lifetime stats) ---------- */
+function blankCareer(){ return {shifts:0, done:0, fired:0, takings:0, rudeKO:0, bossKO:0, niceServed:0, nicePunched:0, escaped:0, punches:0, hits:0, bestCombo:1, history:[]}; }
+function loadCareer(){
+  const c = blankCareer();
+  try { const v = JSON.parse(store.get(KEY_CAREER, 'null')); if (v && typeof v === 'object') for (const k in c) if (k in v) c[k] = v[k]; } catch(e){}
+  if (!Array.isArray(c.history)) c.history = [];
+  return c;
+}
+function saveShift(){
+  const c = loadCareer();
+  c.shifts++; if (endReason === 'fired') c.fired++; else c.done++;
+  c.takings += score;
+  for (const k of ['rudeKO','bossKO','niceServed','nicePunched','escaped','punches','hits']) c[k] += stats[k];
+  c.bestCombo = Math.max(c.bestCombo, maxMult);
+  c.history.unshift({t:Date.now(), s:score, f:endReason === 'fired' ? 1 : 0, at:endClock});
+  c.history = c.history.slice(0, 5);
+  store.set(KEY_CAREER, JSON.stringify(c));
+}
+function rankFor(c){
+  if (!c.shifts) return 'Trainee · first day';
+  const ranks = [[0,'Trainee'],[3,'Casual'],[8,'Part-timer'],[15,'Senior casual'],[25,'Shift supervisor'],[40,'Store manager'],[60,'Area manager']];
+  let r = ranks[0][1]; for (const [n, name] of ranks) if (c.done >= n) r = name;
+  return r + ' · ' + c.done + ' shift' + (c.done === 1 ? '' : 's') + ' survived';
+}
+function esc(t){ return String(t).replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch])); }
+function renderRecord(){
+  const c = loadCareer(), best = Number(store.get(KEY_BEST, '0')) || 0;
+  $('recordRank').textContent = rankFor(c);
+  const acc = c.punches ? Math.round(c.hits / c.punches * 100) + '%' : '–';
+  const tile = (k, v, hot) => '<div class="tile' + (hot ? ' hot' : '') + '"><span class="k">' + k + '</span><span class="v">' + esc(v) + '</span></div>';
+  let html = '<div class="tiles">' +
+    tile('Best shift', moneyShort(best), true) + tile('Total takings', moneyShort(c.takings)) +
+    tile('Shifts worked', c.shifts) + tile('Times fired', c.fired, c.fired > 0) +
+    tile('Rude decked', c.rudeKO) + tile('Demanders KO’d', c.bossKO) +
+    tile('Nice served', c.niceServed) + tile('Nice punched', c.nicePunched, c.nicePunched > 0) +
+    tile('Best combo', 'x' + c.bestCombo) + tile('Accuracy', acc) +
+    '</div><p class="f-sec">Last shifts</p>';
+  if (!c.history.length) html += '<p class="f-empty">No shifts on file yet. Clock on to start your record.</p>';
+  else html += '<ul class="f-list">' + c.history.map(h => {
+    const d = new Date(h.t).toLocaleDateString('en-AU', {day:'2-digit', month:'short'});
+    return '<li><span>' + esc(d) + '<span class="tag ' + (h.f ? 'fired">Fired ' + esc(h.at || '') : 'done">Done') + '</span></span><span>' + esc(moneyShort(h.s)) + '</span></li>';
+  }).join('') + '</ul>';
+  $('recordBody').innerHTML = html;
+}
+const recordScreen = $('recordScreen');
+let recordFrom = null;
+function openRecord(from){
+  recordFrom = from; renderRecord();
+  from.hidden = true; recordScreen.hidden = false; recordScreen.scrollTop = 0;
+  try { history.pushState({record:1}, ''); } catch(e){}
+  $('recordBack').focus({preventScroll:true});
+}
+function closeRecord(viaPop){
+  if (recordScreen.hidden) return;
+  recordScreen.hidden = true;
+  if (recordFrom) recordFrom.hidden = false;
+  if (!viaPop) { try { if (history.state && history.state.record) history.back(); } catch(e){} }
+}
+window.addEventListener('popstate', () => closeRecord(true));
+$('recordBtn').addEventListener('click', () => { SFX.init(); openRecord(startScreen); });
+$('recordBtn2').addEventListener('click', () => { SFX.init(); openRecord(endScreen); });
+$('recordBack').addEventListener('click', () => closeRecord(false));
+$('recordPlay').addEventListener('click', () => { closeRecord(false); startGame(); });
+$('recordReset').addEventListener('click', () => {
+  if (!$('recordReset').dataset.armed) { $('recordReset').dataset.armed = '1'; $('recordReset').textContent = 'Tap again to wipe your record'; return; }
+  delete $('recordReset').dataset.armed; $('recordReset').textContent = 'Reset my record';
+  store.set(KEY_CAREER, JSON.stringify(blankCareer())); store.set(KEY_BEST, '0');
+  renderRecord(); renderBest();
+});
+
 function showReceipt(){
+  saveShift();
   const best = Number(store.get(KEY_BEST, '0')) || 0;
   const isBest = score > best && score > 0;
   if (isBest) store.set(KEY_BEST, String(score));

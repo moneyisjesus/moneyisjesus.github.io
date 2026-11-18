@@ -1,5 +1,5 @@
 // Retail Hell service worker: keeps the game playable offline
-const CACHE = 'retail-hell-v1';
+const CACHE = 'retail-hell-v2';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-maskable-512.png', './privacy.html'];
 
 self.addEventListener('install', e => {
