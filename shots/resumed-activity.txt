@@ -1,0 +1,1 @@
+    topResumedActivity=ActivityRecord{ff2a161 u0 com.moneyisjesus.registerrage/.MainActivity t8}

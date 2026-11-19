@@ -1,0 +1,7 @@
+--------- beginning of main
+11-19 00:07:25.344  1824  2433 W chromium: [1119/000725.344815:WARNING:dns_config_service_android.cc(81)] Failed to read DnsConfig.
+11-19 00:07:46.049  3871  4019 W chromium: [WARNING:dns_config_service_android.cc(115)] Failed to read DnsConfig.
+11-19 00:07:46.106  3871  4025 E chromium: [ERROR:simple_version_upgrade.cc(152)] Failed to write a new fake index.
+11-19 00:07:46.109  3871  4023 E chromium: [ERROR:simple_file_enumerator.cc(21)] opendir /data/user/0/com.moneyisjesus.registerrage/cache/WebView/Default/HTTP Cache/Code Cache/wasm: No such file or directory (2)
+11-19 00:07:46.109  3871  4023 E chromium: [ERROR:simple_index_file.cc(614)] Could not reconstruct index from disk
+11-19 00:08:02.595  4007  4071 I chromium: [INFO:audio_latency.cc(179)] audioHardwareBufferSize = 4360
