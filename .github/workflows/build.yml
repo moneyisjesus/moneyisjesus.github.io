@@ -59,14 +59,28 @@ jobs:
           script: |
             mkdir -p shots
             adb install -r out/apk/debug/app-debug.apk
-            adb shell am start -W -n com.moneyisjesus.registerrage/.MainActivity
-            sleep 25
+            adb shell input keyevent KEYCODE_HOME
+            sleep 3
+            (adb shell screenrecord --bit-rate 6000000 --time-limit 75 /sdcard/demo.mp4 &) ; sleep 2
+            adb shell input keyevent KEYCODE_HOME
+            sleep 3
+            adb shell monkey -p com.moneyisjesus.registerrage -c android.intent.category.LAUNCHER 1
+            sleep 12
             adb exec-out screencap -p > shots/1-start-screen.png
-            adb shell dumpsys activity activities | grep -E "mResumedActivity|topResumedActivity" > shots/resumed-activity.txt || true
-            adb shell input tap 540 1700
-            sleep 6
-            adb exec-out screencap -p > shots/2-tap.png
-            adb shell dumpsys window | grep -E "mCurrentFocus|mFocusedApp" > shots/focused-window.txt || true
+            adb shell dumpsys activity activities | grep -E "topResumedActivity" > shots/resumed-activity.txt || true
+            adb shell input tap 858 654
+            sleep 3
+            adb shell input tap 540 1680
+            sleep 4
+            adb exec-out screencap -p > shots/2-playing.png
+            for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do adb shell input tap $((300 + (i * 97) % 500)) $((1350 + (i * 61) % 450)); sleep 1; done
+            sleep 3
+            adb exec-out screencap -p > shots/3-mid-shift.png
+            adb shell input keyevent KEYCODE_APP_SWITCH
+            sleep 4
+            adb exec-out screencap -p > shots/4-recent-apps.png
+            sleep 30
+            adb pull /sdcard/demo.mp4 shots/demo.mp4 || true
             adb logcat -d -s chromium:I > shots/web-console.txt || true
 
       - uses: actions/upload-artifact@v4
